@@ -3,7 +3,7 @@
 namespace WeatherDataGenerator.Domain.Tests.Utility
 {
     [TestClass]
-    public class MathUtilityTests
+    public class WeatherMathUtilityTests
     {
         [TestMethod]
         public void GenerateGuassianDistribution_DefaultArrayLengthCorrect_AreEqual()

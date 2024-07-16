@@ -10,9 +10,10 @@
         public string WindSpeedUnit { get; set; } = string.Empty;
         public string WindDirection { get; set; } = string.Empty;
         public string Precipitation { get; set; } = string.Empty;
+        public string Humidity { get; set; } = string.Empty;
 
-        public string ToCsv() => $"{Longitude},{Latitude},{Temperature},{TemperatureUnit},{WindSpeed},{WindSpeedUnit},{WindDirection},{Precipitation}";
+        public string ToCsv() => $"{Longitude},{Latitude},{Temperature},{TemperatureUnit},{WindSpeed},{WindSpeedUnit},{WindDirection},{Precipitation},{Humidity}";
 
-        public string ToPlainText() => $"{Longitude}\t{Latitude}\t{Temperature}\t{TemperatureUnit}\t{WindSpeed}\t{WindSpeedUnit}\t{WindDirection}\t{Precipitation}";
+        public string ToPlainText() => $"{Longitude}\t{Latitude}\t{Temperature}\t{TemperatureUnit}\t{WindSpeed}\t{WindSpeedUnit}\t{WindDirection}\t{Precipitation}\t{Humidity}";
     }
 }

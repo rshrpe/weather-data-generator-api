@@ -33,7 +33,8 @@ namespace WeatherDataGenerator.Domain.Data.GeneratorData.Weather
                                 WindSpeed = windspeedDistributions.ElementAt(Random.Shared.Next(0, windspeedDistributions.Count())).ToString("N1"),
                                 WindSpeedUnit = "km/h",
                                 WindDirection = windDirections.ElementAt(Random.Shared.Next(0, windDirections.Count())),
-                                Precipitation = Random.Shared.Next(0, 100).ToString()
+                                Precipitation = Random.Shared.Next(0, 100).ToString(),
+                                Humidity = Random.Shared.Next(0, 100).ToString()
                             };
                         })
                     };
