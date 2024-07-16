@@ -1,5 +1,5 @@
 ﻿using WeatherDataGenerator.Domain.Data.FileData;
-using WeatherDataGenerator.Domain.Models.Weather;
+using WeatherDataGenerator.Domain.Models.Base;
 
 namespace WeatherDataGenerator.Domain.Tests.Data.FileData
 {

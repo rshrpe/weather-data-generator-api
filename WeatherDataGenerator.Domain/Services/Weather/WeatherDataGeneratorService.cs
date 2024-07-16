@@ -1,31 +1,62 @@
 ﻿using Microsoft.AspNetCore.Http;
-using WeatherDataGenerator.Domain.Data.FileData;
-using WeatherDataGenerator.Domain.Data.WeatherData;
+using Microsoft.Extensions.DependencyInjection;
+using WeatherDataGenerator.Domain.Data.WeatherFileData;
+using WeatherDataGenerator.Domain.Data.GeneratorData;
+using WeatherDataGenerator.Domain.Models.Base;
+using WeatherDataGenerator.Domain.Models.Weather;
 
 namespace WeatherDataGenerator.Domain.Services.DataGenerator
 {
-    public class WeatherDataGeneratorService(IWeatherDataAccess weatherDataAccess, IFileDataAccess fileDataAccess) : IWeatherDataGeneratorService
+    public class WeatherDataGeneratorService([FromKeyedServices("weather")] IGeneratorData generatorData, IFileData fileData) : IWeatherDataGeneratorService
     {
-        private readonly IWeatherDataAccess _weatherDataAccess = weatherDataAccess;
-        private readonly IFileDataAccess _fileDataAccess = fileDataAccess;
+        private readonly IGeneratorData _generatorData = generatorData;
+        private readonly IFileData _fileData = fileData;
 
         /// <summary>
         /// Service layer wrapper for generating an enumerable of weather log files for a given number of days. The data is generated into an in memory stream and a resulting file output. 
         /// </summary>
-        /// <param name="days"></param>
+        /// <param name="days"></param>s
         /// <returns>An IResult in the form of a file.</returns>
-        public async Task<IResult> GenerateByDays(int days)
+        public async Task<IResult> GeneratePlainText(int days)
         {
             if (days < 1) return Results.BadRequest("The provided days must be 1 or greater.");
             if (days > 28) return Results.BadRequest("The provided days must be 28 or less.");
 
-            var generatedData = _weatherDataAccess.GenerateDataByDays(days);
-            if (generatedData.Error != null || generatedData.Data == null) return Results.BadRequest(generatedData.Error);           
+            DataResult<IEnumerable<IWeatherLog>> generatedData = generatorData.Generate(days);
+            if (generatedData.Error != null || generatedData.Data == null) return Results.BadRequest(generatedData.Error);
 
-            var bytestreamData = _fileDataAccess.GenerateByteStream(generatedData.Data);
-            if (bytestreamData.Error != null || bytestreamData.Data == null) return Results.BadRequest(bytestreamData.Error);
+            DataResult<byte[]> fileData = _fileData.GeneratePlainText(generatedData.Data);
+            if (fileData.Error != null || fileData.Data == null) return Results.BadRequest(fileData.Error);
 
-            return Results.File(bytestreamData.Data, fileDownloadName: $"data.WIS");
+            return Results.File(fileData.Data, fileDownloadName: "data.WIS");
+        }
+
+        public async Task<IResult> GenerateCsv(int days)
+        {
+            if (days < 1) return Results.BadRequest("The provided days must be 1 or greater.");
+            if (days > 28) return Results.BadRequest("The provided days must be 28 or less.");
+
+            DataResult<IEnumerable<IWeatherLog>> generatedData = generatorData.Generate(days);
+            if (generatedData.Error != null || generatedData.Data == null) return Results.BadRequest(generatedData.Error);
+
+            DataResult<byte[]> fileData = _fileData.GenerateCsv(generatedData.Data);
+            if (fileData.Error != null || fileData.Data == null) return Results.BadRequest(fileData.Error);
+
+            return Results.File(fileData.Data, fileDownloadName: "data.csv");
+        }
+
+        public async Task<IResult> GenerateJson(int days)
+        {
+            if (days < 1) return Results.BadRequest("The provided days must be 1 or greater.");
+            if (days > 28) return Results.BadRequest("The provided days must be 28 or less.");
+
+            DataResult<IEnumerable<IWeatherLog>> generatedData = generatorData.Generate(days);
+            if (generatedData.Error != null || generatedData.Data == null) return Results.BadRequest(generatedData.Error);
+
+            DataResult<byte[]> fileData = _fileData.GenerateJson(generatedData.Data);
+            if (fileData.Error != null || fileData.Data == null) return Results.BadRequest(fileData.Error);
+
+            return Results.File(fileData.Data, fileDownloadName: "data.json");
         }
     }
 }

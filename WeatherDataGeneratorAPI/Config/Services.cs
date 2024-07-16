@@ -1,6 +1,7 @@
 ﻿using Carter;
-using WeatherDataGenerator.Domain.Data.FileData;
-using WeatherDataGenerator.Domain.Data.WeatherData;
+using WeatherDataGenerator.Domain.Data.WeatherFileData;
+using WeatherDataGenerator.Domain.Data.GeneratorData;
+using WeatherDataGenerator.Domain.Data.GeneratorData.Weather;
 using WeatherDataGenerator.Domain.Services.DataGenerator;
 
 namespace WeatherDataGenerator.API.Config
@@ -26,8 +27,8 @@ namespace WeatherDataGenerator.API.Config
 
         private static void ConfigureDataAccess(this IServiceCollection services)
         {
-            services.AddScoped<IWeatherDataAccess, WeatherDataAccess>();
-            services.AddScoped<IFileDataAccess, FileDataAccess>();
+            services.AddKeyedScoped<IGeneratorData, WeatherGeneratorData>("weather");
+            services.AddScoped<IFileData, FileData>();
         }
     }
 }

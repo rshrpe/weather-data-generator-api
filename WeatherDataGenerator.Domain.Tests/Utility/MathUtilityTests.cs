@@ -14,7 +14,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var standardCount = 5400;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std);
 
             // Assert
             Assert.AreEqual(result.Count(), standardCount);
@@ -29,7 +29,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var standardCount = 5400;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std);
 
             // Assert
             Assert.AreEqual(result.Count(), standardCount);
@@ -44,7 +44,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var standardCount = 1;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std, standardCount);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std, standardCount);
 
             // Assert
             Assert.AreEqual(result.Count(), 100);
@@ -59,7 +59,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var standardCount = 120000;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std, standardCount);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std, standardCount);
 
             // Assert
             Assert.AreEqual(result.Count(), 10000);
@@ -73,7 +73,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var std = 2.0f;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std);
 
             // Assert
             Assert.IsFalse(result.Any(x => x < 40.0f));
@@ -87,7 +87,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var std = 2.0f;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std);
 
             // Assert
             Assert.IsFalse(result.Any(x => x > 60.0f));
@@ -101,7 +101,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var std = 10.0f;
 
             // Act
-            var result = MathUtility.GenerateGuassianDistribution(avg, std);
+            var result = WeatherMathUtility.GenerateGuassianDistribution(avg, std);
 
             // Assert
             Assert.IsTrue(result.Any(x => x < 0.0f));
@@ -114,7 +114,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var current = 0.0f;
 
             // Act
-            var result = MathUtility.Map(current, 0.0f, 100.0f, -200.0f, 400.0f);
+            var result = WeatherMathUtility.Map(current, 0.0f, 100.0f, -200.0f, 400.0f);
 
             // Assert
             Assert.AreEqual(result, -200.0f);
@@ -127,7 +127,7 @@ namespace WeatherDataGenerator.Domain.Tests.Utility
             var current = 100.0f;
 
             // Act
-            var result = MathUtility.Map(current, 0.0f, 100.0f, -200.0f, 200.0f);
+            var result = WeatherMathUtility.Map(current, 0.0f, 100.0f, -200.0f, 200.0f);
 
             // Assert
             Assert.AreEqual(result, 200.0f);

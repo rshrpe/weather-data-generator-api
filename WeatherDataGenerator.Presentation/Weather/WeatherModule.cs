@@ -12,7 +12,7 @@ namespace WeatherDataGenerator.Presentation.Weather
 
         public override void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("generate/days", async ([FromServices] IWeatherDataGeneratorService dataGeneratorService, [FromQuery] int days = 7) => await dataGeneratorService.GenerateByDays(days));
+            app.MapGet("generate/days/plaintext", async ([FromServices] IWeatherDataGeneratorService dataGeneratorService, [FromQuery] int days = 7) => await dataGeneratorService.GeneratePlainText(days));
         }
     }
 }

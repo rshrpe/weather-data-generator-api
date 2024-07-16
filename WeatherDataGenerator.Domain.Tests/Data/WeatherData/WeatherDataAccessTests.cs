@@ -1,5 +1,6 @@
 ﻿using WeatherDataGenerator.Domain.Data.WeatherData;
-using WeatherDataGenerator.Domain.Models.Weather;
+using WeatherDataGenerator.Domain.Models.Base;
+using WeatherDataGenerator.Domain.Models.Weather.WeatherLog;
 
 namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
 {
@@ -73,7 +74,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Longitude.GetType() == typeof(decimal));
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Longitude.GetType() == typeof(decimal));
         }
 
         [TestMethod]
@@ -87,7 +88,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Longitude.ToString().Split('.')[1].Count() == 6);
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Longitude.ToString().Split('.')[1].Count() == 6);
         }
 
         [TestMethod]
@@ -101,7 +102,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(result.Data.All(x => ((WeatherLog)x).WeatherLogRecords.All(r => ((WeatherLogRecord)r).Longitude > -180 && ((WeatherLogRecord)r).Longitude < 180)));
+            Assert.IsTrue(result.Data.All(x => ((WeatherLog)x).WeatherLogRecords.All(r => ((EarthquakeLogRecord)r).Longitude > -180 && ((EarthquakeLogRecord)r).Longitude < 180)));
         }
 
         [TestMethod]
@@ -115,7 +116,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Latitude.GetType() == typeof(decimal));
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Latitude.GetType() == typeof(decimal));
         }
 
         [TestMethod]
@@ -129,7 +130,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Latitude.ToString().Split('.')[1].Count() == 6);
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Latitude.ToString().Split('.')[1].Count() == 6);
         }
 
         [TestMethod]
@@ -143,7 +144,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(result.Data.All(x => ((WeatherLog)x).WeatherLogRecords.All(r => ((WeatherLogRecord)r).Latitude > -90 && ((WeatherLogRecord)r).Latitude < 90)));
+            Assert.IsTrue(result.Data.All(x => ((WeatherLog)x).WeatherLogRecords.All(r => ((EarthquakeLogRecord)r).Latitude > -90 && ((EarthquakeLogRecord)r).Latitude < 90)));
         }
 
         [TestMethod]
@@ -157,7 +158,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Temperature.ToString().Split('.')[1].Count() == 1);
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Temperature.ToString().Split('.')[1].Count() == 1);
         }
 
         [TestMethod]
@@ -171,7 +172,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Temperature.GetType() == typeof(float));
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Temperature.GetType() == typeof(float));
         }
 
         [TestMethod]
@@ -185,7 +186,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Windspeed.ToString().Split('.')[1].Count() == 1);
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Windspeed.ToString().Split('.')[1].Count() == 1);
         }
 
         [TestMethod]
@@ -199,7 +200,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Windspeed.GetType() == typeof(float));
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).Windspeed.GetType() == typeof(float));
         }
 
         [TestMethod]
@@ -213,7 +214,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).TemperatureUnit == "C");
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).TemperatureUnit == "C");
         }
 
         [TestMethod]
@@ -227,7 +228,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).WindspeedUnit == "km/h");
+            Assert.IsTrue(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).WindspeedUnit == "km/h");
         }
 
         [TestMethod]
@@ -242,7 +243,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(WindSpeeds.Contains(((WeatherLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).WindspeedDirection));
+            Assert.IsTrue(WindSpeeds.Contains(((EarthquakeLogRecord)((WeatherLog)result.Data.First()).WeatherLogRecords.First()).WindspeedDirection));
         }
 
         [TestMethod]
@@ -256,7 +257,7 @@ namespace WeatherDataGenerator.Domain.Tests.Data.WeatherData
             var result = weatherDataAccess.GenerateDataByDays(days);
 
             // Assert
-            Assert.IsTrue(result.Data.All(x => ((WeatherLog)x).WeatherLogRecords.All(r => ((WeatherLogRecord)r).Precipitation >= 0 && ((WeatherLogRecord)r).Precipitation <= 100)));
+            Assert.IsTrue(result.Data.All(x => ((WeatherLog)x).WeatherLogRecords.All(r => ((EarthquakeLogRecord)r).Precipitation >= 0 && ((EarthquakeLogRecord)r).Precipitation <= 100)));
         }
     }
 }

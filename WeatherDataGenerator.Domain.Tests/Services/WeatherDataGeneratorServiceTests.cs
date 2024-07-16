@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using WeatherDataGenerator.Domain.Data.FileData;
-using WeatherDataGenerator.Domain.Data.WeatherData;
 using WeatherDataGenerator.Domain.Services.DataGenerator;
 
 namespace WeatherDataGenerator.Domain.Tests.Services

@@ -1,10 +1,22 @@
 ﻿using MathNet.Numerics;
 using MathNet.Numerics.Distributions;
+using MathNet.Numerics.Random;
 
 namespace WeatherDataGenerator.Domain.Utility
 {
-    public static class MathUtility
+    public static class WeatherMathUtility
     {
+        /// <summary>
+        /// Generates coordinates for a given range between -range and range.
+        /// </summary>
+        /// <param name="range"></param>
+        /// <returns>A decimal.</returns>
+        public static decimal GenerateEarthCoordinates(float range)
+        {
+            decimal decimalRange = (decimal)range;
+            return (-decimalRange) + (Random.Shared.NextDecimal() * (decimalRange * 2));
+        }
+
         /// <summary>
         /// Generate a normal distribution of values given an average and standard deviation with a sample size of n between 100 and 10000.
         /// </summary>
